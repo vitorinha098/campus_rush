@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'ecras/cra_leaderboard.dart';
+import 'ecras/ecra_perfil.dart';
+import 'ecras/ecra_jogo_contentor.dart';
 
 class EcraPlaceholder extends StatelessWidget {
   final String titulo;
@@ -47,12 +50,12 @@ final GoRouter appRouter = GoRouter(
     GoRoute(path: '/registo', builder: (_, __) => const EcraPlaceholder(titulo: '2. Registo')),
     GoRoute(path: '/recuperar-password', builder: (_, __) => const EcraPlaceholder(titulo: '3. Recuperar Password')),
     GoRoute(path: '/menu', builder: (_, __) => const EcraPlaceholder(titulo: '4. Menu Principal')),
-    GoRoute(path: '/perfil', builder: (_, __) => const EcraPlaceholder(titulo: '5. Perfil de Utilizador')),
-    GoRoute(path: '/leaderboard', builder: (_, __) => const EcraPlaceholder(titulo: '6. Leaderboard Global')),
+    GoRoute(path: '/perfil', builder: (_, __) => const EcraPerfil()),
+    GoRoute(path: '/leaderboard', builder: (_, __) => const EcraLeaderboard()),
     GoRoute(path: '/definicoes', builder: (_, __) => const EcraPlaceholder(titulo: '7. Definições')),
     GoRoute(path: '/admin/dashboard', builder: (_, __) => const EcraPlaceholder(titulo: '8. Admin: Dashboard & Contas')),
     GoRoute(path: '/admin/jogo', builder: (_, __) => const EcraPlaceholder(titulo: '9. Admin: Gestão de Jogo')),
     GoRoute(path: '/sobre', builder: (_, __) => const EcraPlaceholder(titulo: '10. Sobre o Jogo')),
-    GoRoute(path: '/jogar', builder: (_, __) => const EcraPlaceholder(titulo: 'Jogo Flame (Campus Rush)')),
+    GoRoute(path: '/jogar', builder: (_, __) => const EcraJogoContentor()),
   ],
 );
