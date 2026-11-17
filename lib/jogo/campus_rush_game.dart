@@ -3,8 +3,9 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import '../modelos/configuracao_jogo_modelo.dart';
+import 'package:flutter/services.dart';
 
-class CampusRushGame extends FlameGame with TapCallbacks {
+class CampusRushGame extends FlameGame with TapCallbacks, KeyboardEvents {
   final ConfiguracaoJogoModelo config;
   final void Function(int pontuacaoFinal, int faseAlcancada) aoTerminarJogo;
 
@@ -90,6 +91,32 @@ class CampusRushGame extends FlameGame with TapCallbacks {
       _faixaAtual++;
     }
     _atualizarPosicaoJogador();
+  }
+
+  /// Permite também mover o estudante com as setas do teclado ou teclas A/D
+  @override
+  KeyEventResult onKeyEvent(
+      KeyEvent event,
+      Set<LogicalKeyboardKey> keysPressed,
+      ) {
+    if (jogoTerminado) return KeyEventResult.ignored;
+
+    if (event is KeyDownEvent) {
+      if ((event.logicalKey == LogicalKeyboardKey.arrowLeft ||
+          event.logicalKey == LogicalKeyboardKey.keyA) &&
+          _faixaAtual > 0) {
+        _faixaAtual--;
+        _atualizarPosicaoJogador();
+        return KeyEventResult.handled;
+      } else if ((event.logicalKey == LogicalKeyboardKey.arrowRight ||
+          event.logicalKey == LogicalKeyboardKey.keyD) &&
+          _faixaAtual < 2) {
+        _faixaAtual++;
+        _atualizarPosicaoJogador();
+        return KeyEventResult.handled;
+      }
+    }
+    return KeyEventResult.ignored;
   }
 
   void _atualizarPosicaoJogador() {
